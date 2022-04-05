@@ -2,7 +2,7 @@ package com.example.demospringupgrade.todo;
 
 import java.util.Objects;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
 

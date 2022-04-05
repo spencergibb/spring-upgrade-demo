@@ -1,15 +1,13 @@
 package com.example.demospringupgrade.todo;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.core.log.LogMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +20,11 @@ public class TodoApplication {
 	private static final Log log = LogFactory.getLog(TodoApplication.class);
 
 	private final TodoRepository todoRepository;
-	private final Tracer tracer;
+//	private final Tracer tracer;
 
-	public TodoApplication(TodoRepository todoRepository, Tracer tracer) {
+	public TodoApplication(TodoRepository todoRepository/*, Tracer tracer*/) {
 		this.todoRepository = todoRepository;
-		this.tracer = tracer;
+//		this.tracer = tracer;
 	}
 
 	@PostConstruct
@@ -41,7 +39,7 @@ public class TodoApplication {
 	}
 
 	void longRunningWork() {
-		Span newSpan = this.tracer.nextSpan().name("longRunningWork");
+		/*Span newSpan = this.tracer.nextSpan().name("longRunningWork");
 		try (Tracer.SpanInScope ws = this.tracer.withSpan(newSpan.start())) {
 			log.info(LogMessage.format("Doing long work"));
 			newSpan.tag("workType", "longWork");
@@ -49,7 +47,7 @@ public class TodoApplication {
 		}
 		finally {
 			newSpan.end();
-		}
+		}*/
 	}
 
 	@GetMapping("/todos/{id}")

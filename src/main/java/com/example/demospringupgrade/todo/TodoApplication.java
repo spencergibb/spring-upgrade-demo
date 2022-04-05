@@ -1,5 +1,7 @@
 package com.example.demospringupgrade.todo;
 
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,11 +22,11 @@ public class TodoApplication {
 	private static final Log log = LogFactory.getLog(TodoApplication.class);
 
 	private final TodoRepository todoRepository;
-//	private final Tracer tracer;
+	private final ObservationRegistry registry;
 
-	public TodoApplication(TodoRepository todoRepository/*, Tracer tracer*/) {
+	public TodoApplication(TodoRepository todoRepository, ObservationRegistry registry) {
 		this.todoRepository = todoRepository;
-//		this.tracer = tracer;
+		this.registry = registry;
 	}
 
 	@PostConstruct
@@ -39,15 +41,9 @@ public class TodoApplication {
 	}
 
 	void longRunningWork() {
-		/*Span newSpan = this.tracer.nextSpan().name("longRunningWork");
-		try (Tracer.SpanInScope ws = this.tracer.withSpan(newSpan.start())) {
-			log.info(LogMessage.format("Doing long work"));
-			newSpan.tag("workType", "longWork");
-			newSpan.event("longRunningWorkDone");
-		}
-		finally {
-			newSpan.end();
-		}*/
+		Observation.createNotStarted("long-running-work", registry)
+				.highCardinalityTag("work-type", "longWork")
+				.observe(() -> log.info(LogMessage.format("Doing long work")));
 	}
 
 	@GetMapping("/todos/{id}")

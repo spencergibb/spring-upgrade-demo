@@ -14,7 +14,7 @@
 	<name>demospringupgrade</name>
 	<description>Demo project for Upgrading Spring Boot</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>

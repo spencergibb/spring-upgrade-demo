@@ -1,6 +1,5 @@
 package com.example.demospringupgrade.common;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -19,7 +18,7 @@ public class CustomAutoConfiguration {
     @Bean
     CommandLineRunner customCommandLineRunner() {
         return args -> {
-            List<String> items = Arrays.asList("A", "B", "C");
+            var items = List.of("A", "B", "C");
             log.info(LogMessage.format("From CustomAutoConfiguration %s", items));
         };
     }

@@ -6,11 +6,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.log.LogMessage;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 public class CustomAutoConfiguration {
 
     private static final Log log = LogFactory.getLog(CustomAutoConfiguration.class);
